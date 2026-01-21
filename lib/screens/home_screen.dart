@@ -12,11 +12,17 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController inputTextController = TextEditingController();
 
   @override
+  void dispose() {
+    inputTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff1768d7),
-        title: Text(
+        backgroundColor: const Color(0xff1768d7),
+        title: const Text(
           'My Tasks',
           style: TextStyle(
             color: Colors.white,
