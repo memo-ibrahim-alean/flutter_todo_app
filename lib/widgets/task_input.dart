@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TaskInput extends StatelessWidget {
-  const TaskInput({super.key});
+  const TaskInput({super.key, required this.inputTextController});
+
+  final TextEditingController inputTextController;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +26,10 @@ class TaskInput extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextField(
+            controller: inputTextController,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.black),
+                borderSide: BorderSide(color: Colors.black),
               ),
               hintText: 'Add a new task',
               border: OutlineInputBorder(
@@ -35,7 +38,7 @@ class TaskInput extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -47,7 +50,7 @@ class TaskInput extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text('Add Task'),
+              child: const Text('Add Task'),
             ),
           ),
         ],

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/task_input.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController inputTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,9 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(50.0),
         child: Column(
           children: [
-            TaskInput(), // Body content goes here
+            TaskInput(
+              inputTextController: inputTextController,
+            ), // Body content goes here
           ],
         ),
       ),
