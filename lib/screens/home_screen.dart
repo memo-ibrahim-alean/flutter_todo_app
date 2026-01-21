@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/widgets/task_input.dart';
+import 'package:todo_app/widgets/task_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,12 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(50.0),
+        padding: const EdgeInsets.all(40.0),
         child: Column(
           children: [
-            TaskInput(
-              inputTextController: inputTextController,
-            ), // Body content goes here
+            TaskInput(inputTextController: inputTextController),
+            SizedBox(height: 20),
+            Expanded(child: TaskList()), // Body content goes here
           ],
         ),
       ),
