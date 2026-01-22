@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class TaskList extends StatelessWidget {
-  const TaskList({super.key});
+  final List<String> tasks;
+  final int total;
+
+  const TaskList({super.key, required this.tasks, required this.total});
 
   @override
   Widget build(BuildContext context) {
-    final tasks = ['Buy groceries', 'Finish project', 'Call mom', 'Go to gym'];
-
     return Column(
       children: [
         const SizedBox(height: 15),
@@ -42,8 +43,8 @@ class TaskList extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        const Text(
-          'Total Tasks: 5 | Completed: 0',
+        Text(
+          'Total Tasks: $total | Completed: 0',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ],

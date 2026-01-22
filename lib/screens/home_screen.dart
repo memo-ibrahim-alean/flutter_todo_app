@@ -11,6 +11,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController inputTextController = TextEditingController();
+  List<String> tasks = [];
+
+  void addTask(String task) {
+    setState(() {
+      tasks.add(task);
+    });
+  }
 
   @override
   void dispose() {
@@ -37,9 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(40.0),
         child: Column(
           children: [
-            TaskInput(inputTextController: inputTextController),
+            TaskInput(
+              inputTextController: inputTextController,
+              onAddTask: addTask,
+            ),
             SizedBox(height: 20),
-            Expanded(child: TaskList()), // Body content goes here
+            Expanded(child: TaskList(tasks: tasks, total: tasks.length)), // Body content goes here
           ],
         ),
       ),

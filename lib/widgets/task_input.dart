@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TaskInput extends StatelessWidget {
-  const TaskInput({super.key, required this.inputTextController});
+  const TaskInput({
+    super.key,
+    required this.inputTextController,
+    required this.onAddTask,
+  });
 
   final TextEditingController inputTextController;
+  final Function(String) onAddTask;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,10 @@ class TaskInput extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                onAddTask(inputTextController.text);
+                inputTextController.clear();
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xff1768d7),
                 foregroundColor: Colors.white,
