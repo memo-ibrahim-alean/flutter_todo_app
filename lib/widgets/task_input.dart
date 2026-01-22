@@ -48,6 +48,14 @@ class TaskInput extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
+                if (inputTextController.text.isEmpty) {
+                  SnackBar snackBar = SnackBar(
+                    content: Text('you must enter a task name'),
+                    duration: Duration(seconds: 2),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  return;
+                }
                 onAddTask(inputTextController.text);
                 inputTextController.clear();
               },
