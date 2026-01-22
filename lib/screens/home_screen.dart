@@ -19,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void removeTask(int index) {
+    setState(() {
+      tasks.removeAt(index);
+    });
+  }
+
   @override
   void dispose() {
     inputTextController.dispose();
@@ -49,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
               onAddTask: addTask,
             ),
             SizedBox(height: 20),
-            Expanded(child: TaskList(tasks: tasks, total: tasks.length)), // Body content goes here
+            Expanded(
+              child: TaskList(tasks: tasks, total: tasks.length, onRemoveTask: removeTask),
+            ), // Body content goes here
           ],
         ),
       ),

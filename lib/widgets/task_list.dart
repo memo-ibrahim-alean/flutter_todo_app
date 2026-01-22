@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 class TaskList extends StatelessWidget {
   final List<String> tasks;
   final int total;
+  final Function(int)? onRemoveTask;
 
-  const TaskList({super.key, required this.tasks, required this.total});
+  const TaskList({
+    super.key,
+    required this.tasks,
+    required this.total,
+    this.onRemoveTask,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,11 @@ class TaskList extends StatelessWidget {
                   title: Text(tasks[index]),
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (onRemoveTask != null) {
+                        onRemoveTask!(index);
+                      }
+                    },
                   ),
                 ),
               );
