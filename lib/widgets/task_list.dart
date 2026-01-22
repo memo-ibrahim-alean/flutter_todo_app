@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/task.dart';
 
 class TaskList extends StatelessWidget {
-  final List<String> tasks;
+  final List<Task> tasks;
   final int total;
   final Function(int)? onRemoveTask;
+  final Function(int)? onToggleTask;
 
   const TaskList({
     super.key,
     required this.tasks,
     required this.total,
     this.onRemoveTask,
+    this.onToggleTask,
   });
 
   @override
@@ -37,8 +40,15 @@ class TaskList extends StatelessWidget {
                   ],
                 ),
                 child: ListTile(
-                  leading: Checkbox(value: false, onChanged: null),
-                  title: Text(tasks[index]),
+                  leading: Checkbox(
+                    value: tasks[index].isCompleted,
+                    onChanged: (value) {
+                      if (onToggleTask != null) {
+                        onToggleTask!(index);
+                      }
+                    },
+                  ),
+                  title: Text(tasks[index].name),
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),
                     onPressed: () {
@@ -54,7 +64,7 @@ class TaskList extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         Text(
-          'Total Tasks: $total | Completed: 0',
+          'Total Tasks: $total | Completed: ${tasks.where((task) => task.isCompleted).length}',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ],

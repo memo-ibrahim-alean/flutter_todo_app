@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/task.dart';
 import 'package:todo_app/widgets/task_input.dart';
 import 'package:todo_app/widgets/task_list.dart';
 
@@ -11,17 +12,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController inputTextController = TextEditingController();
-  List<String> tasks = [];
+  List<Task> tasks = [];
 
-  void addTask(String task) {
+  void addTask(String taskName) {
     setState(() {
-      tasks.add(task);
+      tasks.add(Task(name: taskName, isCompleted: false));
     });
   }
 
   void removeTask(int index) {
     setState(() {
       tasks.removeAt(index);
+    });
+  }
+
+  void toggleTask(int index) {
+    setState(() {
+      tasks[index].isCompleted = !tasks[index].isCompleted;
     });
   }
 
@@ -56,7 +63,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 20),
             Expanded(
-              child: TaskList(tasks: tasks, total: tasks.length, onRemoveTask: removeTask),
+              child: TaskList(
+                tasks: tasks,
+                total: tasks.length,
+                onRemoveTask: removeTask,
+                onToggleTask: toggleTask,
+              ),
             ), // Body content goes here
           ],
         ),
